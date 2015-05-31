@@ -10,6 +10,13 @@ package appdeportiva;
  * @author Eder Javier
  */
 public class AppDeportiva {
+    
+    public AppDeportiva(){
+    
+    torneo = null;
+    marcadores = new Marcadores();
+    
+    }
 
     /**
      * @param args the command line arguments
