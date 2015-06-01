@@ -8,6 +8,7 @@ package appdeportiva;
 import appdeportiva2.Torneo;
 import java.awt.BorderLayout;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -34,6 +35,34 @@ public class AppDeportiva extends JFrame{
     setTitle("TABLA DE RESULTADOS");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
+    }
+    
+    public void mostrarDialogoResultado(){
+        
+        if(torneo == null){
+            JOptionPane.showMessageDialog(this,"DEBE PRIMERO CARGAR UN TORNEO","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            dialogo.limpiar();
+            dialogo.setVisible(true);
+        }
+    }
+    
+    public void registrarResultado(int equipo1, int equipo2, int goles1, int goles2){
+        
+        if(torneo != null){
+            try{
+                torneo.registrarResultado(equipo1, equipo2, goles1, goles2);
+                refrescar();
+            }
+            catch(Exception e){
+                JOptionPane.showMessageDialog(this, e.getMessage());
+            }
+        }
+    }
+    
+    public void cargarEquipos(){
+        
     }
 
     /**

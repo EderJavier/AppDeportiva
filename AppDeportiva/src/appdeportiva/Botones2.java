@@ -5,13 +5,16 @@
  */
 package appdeportiva;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Eder Javier
  */
-public class Botones2 {
+public class Botones2 extends JPanel implements ActionListener{
     
     private static final String OK = "OK";
     private static final String CANCELAR = "CANCELAR";
@@ -32,6 +35,17 @@ public class Botones2 {
         add(botonCancelar);
     }
     
-    public void
+    public void actionPerformed( ActionEvent evento )
+    {
+        String comando = evento.getActionCommand( );
+        if( OK.equals( comando ) )
+        {
+            dialogo.registrarPartido( );
+        }
+        else if( CANCELAR.equals( comando ) )
+        {
+            dialogo.setVisible( false );
+        }
+    }
     
 }

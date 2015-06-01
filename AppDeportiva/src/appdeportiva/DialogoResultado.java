@@ -6,13 +6,14 @@
 package appdeportiva;
 
 import java.awt.BorderLayout;
+import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
 /**
  *
  * @author Eder Javier
  */
-public class DialogoResultado {
+public class DialogoResultado extends JDialog{
     
     private AppDeportiva interfaz;
     private Equipos equipos;
@@ -30,7 +31,7 @@ public class DialogoResultado {
         add(equipos, BorderLayout.NORTH);
         add(resultados, BorderLayout.CENTER);
         add(botones2, BorderLayout.SOUTH);
-        settitle("REGISTRAR RESULTADO");
+        setTitle("REGISTRAR RESULTADO");
         setSize(230, 190);
     }
     
