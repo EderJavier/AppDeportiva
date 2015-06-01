@@ -9,7 +9,7 @@ package appdeportiva;
  *
  * @author Eder Javier
  */
-class Resultados {
+public class Resultados extends JPanel{
 
     public Resultados() {
     }

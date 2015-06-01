@@ -5,8 +5,12 @@
  */
 package appdeportiva;
 
+import appdeportiva2.Equipo;
 import appdeportiva2.Torneo;
 import java.awt.BorderLayout;
+import java.io.File;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -63,13 +67,83 @@ public class AppDeportiva extends JFrame{
     
     public void cargarEquipos(){
         
+        JFileChooser fc = new JFileChooser("./data");
+        fc.setDialogTitle("CARGAR ARCHIVO DE TORNEO");
+        int resultado = fc.showOpenDialog(this);
+        if(resultado == JFileChooser.APPROVE_OPTION){
+            
+            File archivoTorneo = fc.getSelectedFile();
+            try{
+                torneo = new Torneo(archivoTorneo);
+                String[] nombreEquipos = new String[torneo.darNumeroEquipos()];
+                for(int i = 0; i < torneo.darNumeroEquipos(); i++){
+                    nombreEquipos[i] = torneo.darEquipo(i).toString();
+                }
+                dialogo = new DialogoResultado(this, nombreEquipos);
+                marcadores.iniciarMarcadores(torneo);
+                refrescar();
+                botones.desactivarBotonCargar();
+            }
+            catch(Exception e){
+                torneo = null;
+                JOptionPane.showMessageDialog(this, "PROBLEMAS AL CARGAR TORNEO: \n" + e.getMessage(), "ERROR", JOptionPane.ERROR_MESSAGE);
+                e.printStackTrace();
+            }
+        }
+    }
+    
+    private void refrescar(){
+        
+        marcadores.refrescar();
+        ArrayList tablaPosiciones = new ArrayList();
+        for(int i = 0; i < torneo.darNumeroEquipos(); i++){
+            
+            Equipo e = torneo.darEquipo(i);
+            String[] calculosEquipo = new String[8];
+            calculosEquipo[0] = e.darNombre();
+            calculosEquipo[1] = "" + torneo.darTotalPuntos(i);
+            calculosEquipo[2] = "" + torneo.darPartidosJugados(i);
+            calculosEquipo[3] = "" + torneo.darPartidosGanados(i);
+            calculosEquipo[4] = "" + torneo.darPartidosEmpatados(i);
+            calculosEquipo[5] = "" + torneo.darPartidosPerdidos(i);
+            calculosEquipo[6] = "" + torneo.darGolesAFavor(i);
+            calculosEquipo[7] = "" + torneo.darGolesEnContra(i);
+            tablaPosiciones.add(calculosEquipo);
+        }
+        
+        posiciones.refrescar(tablaPosiciones);
+    }
+    
+    public void reqFuncOpcion1(){
+        
+        if(torneo == null){
+            JOptionPane.showMessageDialog(this, "DEBE PRIMERO CARGAR UN TORNEO", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            String resultado = torneo.metodo1();
+            JOptionPane.showMessageDialog(this, resultado, "RESPUESTA", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+    
+    public void reqFuncOpcion2(){
+        
+        if(torneo == null){
+            JOptionPane.showMessageDialog(this, "DEBE PRIMERO CARGAR UN TORNEO", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+        else{
+            String resultado = torneo.metodo2();
+            JOptionPane.showMessageDialog(this, resultado, "RESPUESTA", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+        
+        AppDeportiva ic = new AppDeportiva();
+        ic.setVisible(true);
+        
     }
     
 }
