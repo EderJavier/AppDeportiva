@@ -21,11 +21,10 @@ public class Torneo {
     private int[][] tablaGoles;
     private Equipo[] equipo;
     
-    public Equipo[] equipo;
-    
+        
     public Torneo(File arch) throws Exception{
         Properties datos = cargarInfoTorneo(arch);
-        incializarEquipos(datos);
+        inicializarEquipos(datos);
         inicializarMarcadores();
     }
     
@@ -83,6 +82,68 @@ public class Torneo {
         tablaGoles[eq2][eq1] = gol2;
     }
     
+    public int darGolesMarcados(int eq1, int eq2){
+        return tablaGoles[eq1][eq2];
+    }
     
+    public int darNumeroEquipos(){
+        return maxEquipos;
+    }
+    
+    public Equipo darEquipo(int eq){
+        return equipo[eq];
+    }
+    
+    public int darPartidosGanados(int equipo){
+        int ganados = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] > tablaGoles[ i ][ equipo ])
+                ganados++;
+        return ganados;
+    }
+    
+    public int darPartidosPerdidos(int equipo){
+        int perdidos = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] < tablaGoles[ i ][ equipo ])
+                perdidos++;
+        return perdidos;
+    }
+    
+    public int darPartidosEmpatados(int equipo){
+        int empatados = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] == tablaGoles[ i ][ equipo ])
+                empatados++;
+        return empatados;
+    }
+    
+    public int darPartidosJugados(int equipo){
+        int jugados = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO)
+                jugados++;
+        return jugados;
+    }
+    
+    public int darGolesEnContra(int equipo){
+        int golesEnContra = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO)
+                golesEnContra += tablaGoles[i][equipo];
+        return golesEnContra;
+    }
+    
+    public int darGolesAFavor(int equipo){
+        int golesAFavor = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO)
+                golesAFavor += tablaGoles[equipo][i];
+        return golesAFavor;
+    }
+    
+    public int darTotalPuntos(int equipo){
+        return 3 * darPartidosGanados(equipo)+ darPartidosEmpatados(equipo);
+    }
     
 }
