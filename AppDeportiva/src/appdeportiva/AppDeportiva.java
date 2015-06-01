@@ -6,12 +6,14 @@
 package appdeportiva;
 
 import appdeportiva2.Torneo;
+import java.awt.BorderLayout;
+import javax.swing.JFrame;
 
 /**
  *
  * @author Eder Javier
  */
-public class AppDeportiva {
+public class AppDeportiva extends JFrame{
     
     private Torneo torneo;
     private Marcadores marcadores;
@@ -23,6 +25,14 @@ public class AppDeportiva {
     
     torneo = null;
     marcadores = new Marcadores();
+    botones = new Botones(this);
+    posiciones = new Posiciones();
+    add(marcadores,BorderLayout.CENTER);
+    add(posiciones,BorderLayout.EAST);
+    add(botones,BorderLayout.SOUTH);
+    setSize(820,230);
+    setTitle("TABLA DE RESULTADOS");
+    setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
     }
 
