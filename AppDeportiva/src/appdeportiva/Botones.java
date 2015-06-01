@@ -6,7 +6,7 @@
 package appdeportiva;
 
 import java.awt.event.ActionListener;
-import javafx.event.ActionEvent;
+import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -18,9 +18,13 @@ public class Botones extends JPanel implements ActionListener{
     
     private static final String CARGAR_EQUIPOS = "CARGAR_EQUIPOS";
     private static final String REGISTRAR_RESULTADO = "REGISTRAR_RESULTADO";
+    private static final String OPCION_1 = "OPCION_1";
+    private static final String OPCION_2 = "OPCION_2";
     private AppDeportiva ventana;
     private JButton botonCargarEquipos;
     private JButton botonRegistrarResultado;
+    private JButton botonOpcion1;
+    private JButton botonOpcion2;
     
     
     public Botones(AppDeportiva ic){
@@ -32,10 +36,18 @@ public class Botones extends JPanel implements ActionListener{
         botonRegistrarResultado = new JButton("REGISTRAR PARTIDO");
         botonRegistrarResultado.setActionCommand(REGISTRAR_RESULTADO);
         botonRegistrarResultado.addActionListener(this);
+        botonOpcion1 = new JButton("OPCIÓN 1");
+        botonOpcion1.setActionCommand(OPCION_1);
+        botonOpcion1.addActionListener(this);
+        botonOpcion2 = new JButton("OPCIÓN 2");
+        botonOpcion2.setActionCommand(OPCION_2);
+        botonOpcion2.addActionListener(this);
         
         
         add(botonCargarEquipos);
         add(botonRegistrarResultado);
+        add( botonOpcion1 );
+        add( botonOpcion2 );
         
     }
     
@@ -47,6 +59,12 @@ public class Botones extends JPanel implements ActionListener{
         }
         else if(CARGAR_EQUIPOS.equals(comando)){
             ventana.cargarEquipos();
+        }
+        else if(OPCION_1.equals(comando)){
+            ventana.reqFuncOpcion1();
+        }
+        else if(OPCION_2.equals(comando)){
+            ventana.reqFuncOpcion2();
         }
     }
     

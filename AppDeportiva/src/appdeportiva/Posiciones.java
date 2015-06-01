@@ -23,7 +23,7 @@ public class Posiciones extends JScrollPane{
         
         txtTabla = new JTextArea(10,60);
         txtTabla.setEditable(false);
-        txtTabla.setFont(new Font("Courier New", Font.PLAIN,12));
+        txtTabla.setFont(new Font("Courier New", Font.PLAIN,14));
         txtTabla.setBackground(getBackground());
         getViewport().add(txtTabla);
         setBorder(new TitledBorder("TABLA DE POSICIONES"));

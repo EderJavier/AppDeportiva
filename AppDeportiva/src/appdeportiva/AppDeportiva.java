@@ -35,7 +35,7 @@ public class AppDeportiva extends JFrame{
     add(marcadores,BorderLayout.CENTER);
     add(posiciones,BorderLayout.EAST);
     add(botones,BorderLayout.SOUTH);
-    setSize(820,230);
+    setSize(1200,700);
     setTitle("TABLA DE RESULTADOS");
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     

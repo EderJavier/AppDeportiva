@@ -146,4 +146,11 @@ public class Torneo {
         return 3 * darPartidosGanados(equipo)+ darPartidosEmpatados(equipo);
     }
     
+    public String metodo1(){
+        return "RESPUESTA 1";
+    }
+    
+    public String metodo2(){
+        return "RESPUESTA 2";
+    }
 }
