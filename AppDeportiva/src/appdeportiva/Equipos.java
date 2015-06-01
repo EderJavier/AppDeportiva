@@ -5,6 +5,12 @@
  */
 package appdeportiva;
 
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.border.TitledBorder;
+
 /**
  *
  * @author Eder Javier
@@ -22,7 +28,7 @@ public class Equipos extends JPanel{
         add(comboEquipo1);
         add(etiquetaVs);
         add(comboEquipo2);
-        setBorder(new TitleBorder("Equipos"));
+        setBorder(new TitledBorder("Equipos"));
     }
     
     public int darEquipo1(){

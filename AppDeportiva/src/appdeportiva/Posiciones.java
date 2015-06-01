@@ -5,10 +5,27 @@
  */
 package appdeportiva;
 
+import java.awt.Font;
+import javax.swing.JTextArea;
+import javax.swing.border.TitledBorder;
+
 /**
  *
  * @author Eder Javier
  */
-class Posiciones {
+public class Posiciones {
+    
+    private JTextArea txtTabla;
+    
+    public Posiciones(){
+        
+        txtTabla = new JTextArea(10,60);
+        txtTabla.setEditable(false);
+        txtTabla.setFont(new Font("Courier New", Font.PLAIN,12));
+        txtTabla.setBackground(getBackground());
+        getViewport().add(txtTabla);
+        setBorder(new TitledBorder("TABLA DE POSICIONES"));
+        
+    }
     
 }
