@@ -5,11 +5,19 @@
  */
 package appdeportiva;
 
+import appdeportiva2.Torneo;
+
 /**
  *
  * @author Eder Javier
  */
 public class AppDeportiva {
+    
+    private Torneo torneo;
+    private Marcadores marcadores;
+    private Posiciones posiciones;
+    private Botones botones;
+    private DialogoResultado dialogo;
     
     public AppDeportiva(){
     
