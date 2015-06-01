@@ -25,7 +25,7 @@ public class Botones2 extends JPanel implements ActionListener{
     public Botones2(DialogoResultado dr){
         
         dialogo = dr;
-        botonOk = new JButton("OK");
+        botonOk = new JButton("REGISTRAR");
         botonOk.setActionCommand(OK);
         botonOk.addActionListener(this);
         botonCancelar = new JButton("CANCELAR");

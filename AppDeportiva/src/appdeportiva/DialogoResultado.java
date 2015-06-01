@@ -32,7 +32,7 @@ public class DialogoResultado extends JDialog{
         add(resultados, BorderLayout.CENTER);
         add(botones2, BorderLayout.SOUTH);
         setTitle("REGISTRAR RESULTADO");
-        setSize(230, 190);
+        setSize(500, 200);
     }
     
     public void limpiar(){
