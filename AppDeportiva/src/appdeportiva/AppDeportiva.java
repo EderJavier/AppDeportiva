@@ -121,7 +121,7 @@ public class AppDeportiva extends JFrame{
         }
         else{
             String resultado = torneo.metodo1();
-            JOptionPane.showMessageDialog(this, resultado, "RESPUESTA", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, resultado, "ERROR AL ORDENAR TABLA", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     
@@ -132,7 +132,7 @@ public class AppDeportiva extends JFrame{
         }
         else{
             String resultado = torneo.metodo2();
-            JOptionPane.showMessageDialog(this, resultado, "RESPUESTA", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(this, resultado, "ERROR AL SALIR", JOptionPane.INFORMATION_MESSAGE);
         }
     }
 
