@@ -1,78 +1,41 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
+ * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package appdeportiva2;
+package StrategyE;
 
-import StrategyE.Consultador;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
+import javaapplication2.Empatado;
+import javaapplication2.Equipo;
+import javaapplication2.Ganado;
+import javaapplication2.Partido;
+import javaapplication2.Perdido;
 
 /**
  *
- * @author sala4
+ * @author EQUIPO
  */
-public class Torneo {
-    //-----------------------------------------------------------------
-    // Constantes
-    //-----------------------------------------------------------------
+public class Consultador {
 
-    /**
-     * Indica que el partido no se ha jugado
-     */
+//    public void consulta(Partido p,int equipo) {
+//        StrategyE strategy = null;
+//        strategy.consul(equipo);
+    //  System.out.println(String.format("Cadena [%s] consulta a [%s]", new Object[]{equipo, resultado}));
+//    }
     public static final int SIN_JUGAR = -1;
-    /**
-     * Indica que el partido no se puede jugar porque sería un equipo jugando
-     * contra él mismo
-     */
     public static final int INVALIDO = -2;
-    //-----------------------------------------------------------------
-    // Atributos
-    //-----------------------------------------------------------------
-    /**
-     * Número de equipos en el campeonato
-     */
     private int maxEquipos;
-    /**
-     * Es la tabla con los goles. En la posición (i,j) aparece el número de
-     * goles que el equipo i le hizo al equipo j
-     */
     private int[][] tablaGoles;
-    /**
-     * Es un arreglo con los equipos en el campeonato. En la posición i aparece
-     * la descripción del equipo i
-     */
     private Equipo[] equipos;
 
-    //-----------------------------------------------------------------
-    // Constructores
-    //-----------------------------------------------------------------
-    /**
-     * Construye un nuevo campeonato de fútbol.
-     *
-     * @param arch Es el archivo que contiene la descripción de los equipos del
-     * campeonato. arch != null.
-     * @throws Exception Se lanza esta excepción si hay problemas cargando el
-     * archivo.
-     */
-    public Torneo(File arch) throws Exception {
+    public Consultador(File arch) throws Exception {
         Properties datos = cargarInfoCampeonato(arch);
         inicializarEquipos(datos);
         inicializarTablaGoles();
     }
 
-    /**
-     * Carga la información de los equipos del campeonato en un objeto de tipo
-     * Properties.
-     *
-     * @param arch Es el archivo que contiene la descripción de los equipos del
-     * campeonato
-     * @return un objeto de la clase Properties con la información del archivo.
-     * @throws Exception Se lanza esta excepción si el archivo no existe o si el
-     * formato del archivo no es válido y no puede ser leído.
-     */
     private Properties cargarInfoCampeonato(File arch) throws Exception {
         Properties datos = new Properties();
         FileInputStream in = new FileInputStream(arch);
@@ -85,15 +48,6 @@ public class Torneo {
         return datos;
     }
 
-    /**
-     * Inicializa el arreglo de equipos con la información que recibe en el
-     * parámetro de entrada. <br>
-     * <b>post: </b> El arreglo de equipos fue inicializado con los nombres de
-     * los equipos que venían en el parámetro de entrada.
-     *
-     * @param datos contiene la información cargada del archivo para inicializar
-     * el campeonato. Esta información es completa y válida.
-     */
     private void inicializarEquipos(Properties datos) {
         String strNumeroEquipos = datos.getProperty("campeonato.equipos");
         maxEquipos = Integer.parseInt(strNumeroEquipos);
@@ -106,10 +60,6 @@ public class Torneo {
         }
     }
 
-    /**
-     * Crea la matriz que contiene la tabla de goles. Es una matriz cuadrada de
-     * maxEquipos filas y maxEquipos columnas
-     */
     private void inicializarTablaGoles() {
         // Crea la matriz que contiene la tabla de goles
         tablaGoles = new int[maxEquipos][maxEquipos];
@@ -124,23 +74,7 @@ public class Torneo {
             }
         }
     }
-
-    //-----------------------------------------------------------------
-    // Métodos
-    //-----------------------------------------------------------------
-    /**
-     * Registra el resultado de un partido. <br>
-     * <b>pre: </b> Los equipos que participan en el campeonato ya fueron
-     * inicializados. <br>
-     * <b>post: </b> Se actualizó la tabla de goles con el resultado indicado.
-     *
-     * @param eq1 Es el número del equipo 1.
-     * @param eq2 Es el número del equipo 2.
-     * @param gol1 Es el número de goles marcados por el equipo eq1.
-     * @param gol2 Es el número de goles marcados por el equipo eq2.
-     * @throws Exception Se lanza esta excepción si los equipos no son válidos,
-     * si el número de goles es inválido o si el partido ya se ha jugado.
-     */
+    
     public void registrarResultado(int eq1, int eq2, int gol1, int gol2) throws Exception {
         if (eq1 < 0 || eq1 >= maxEquipos || eq2 < 0 || eq2 >= maxEquipos) {
             throw new Exception("Equipos incorrectos");
@@ -157,14 +91,7 @@ public class Torneo {
         tablaGoles[ eq1][ eq2] = gol1;
         tablaGoles[ eq2][ eq1] = gol2;
     }
-
-    /**
-     * Retorna el número de goles marcados por el equipo eq1 al equipo eq2.
-     *
-     * @param eq1 Es el número del equipo 1. eq1 es un número de equipo válido.
-     * @param eq2 Es el número del equipo 2. eq2 es un número de equipo válido.
-     * @return número de goles marcados
-     */
+    
     public int darGolesMarcados(int eq1, int eq2) {
         return tablaGoles[ eq1][ eq2];
     }
@@ -187,29 +114,31 @@ public class Torneo {
     public Equipo darEquipo(int eq) {
         return equipos[ eq];
     }
-
-    /**
-     * Retorna el número total de partidos ganados por un equipo.
-     *
-     * @param equipo Número del equipo. equipo es un número válido.
-     * @return número de partidos ganados. número >= 0.
-     */
-    public int darPartidosGanados(int equipo) {
+    
+        public int darPartidosGanados(int equipo){
         int ganados = 0;
-        for (int i = 0; i < maxEquipos; i++) {
-            if (tablaGoles[ equipo][ i] != SIN_JUGAR && tablaGoles[ equipo][ i] != INVALIDO && tablaGoles[ equipo][ i] > tablaGoles[ i][ equipo]) {
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] > tablaGoles[ i ][ equipo ])
                 ganados++;
-            }
-        }
         return ganados;
     }
-
-    /**
-     * Retorna el número total de partidos perdidos por un equipo.
-     *
-     * @param equipo Número del equipo. equipo es un número válido.
-     * @return número de partidos perdidos. número >= 0.
-     */
+    
+//    public int darPartidosPerdidos(int equipo){
+//        int perdidos = 0;
+//        for(int i = 0; i < maxEquipos; i++)
+//            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] < tablaGoles[ i ][ equipo ])
+//                perdidos++;
+//        return perdidos;
+//    }
+    
+    public int darPartidosEmpatados(int equipo){
+        int empatados = 0;
+        for(int i = 0; i < maxEquipos; i++)
+            if(tablaGoles[ equipo ][ i ] != SIN_JUGAR && tablaGoles[ equipo ][ i ] != INVALIDO && tablaGoles[ equipo ][ i ] == tablaGoles[ i ][ equipo ])
+                empatados++;
+        return empatados;
+    }
+    
     public int darPartidosPerdidos(int equipo) {
         int perdidos = 0;
         for (int i = 0; i < maxEquipos; i++) {
@@ -220,28 +149,18 @@ public class Torneo {
         return perdidos;
     }
 
-    /**
-     * Retorna el número total de partidos empatados por un equipo.
-     *
-     * @param equipo Número del equipo. equipo es un número válido.
-     * @return número de partidos empatados. número >= 0.
-     */
-    public int darPartidosEmpatados(int equipo) {
-        int empatados = 0;
-        for (int i = 0; i < maxEquipos; i++) {
-            if (tablaGoles[ equipo][ i] != SIN_JUGAR && tablaGoles[ equipo][ i] != INVALIDO && tablaGoles[ equipo][ i] == tablaGoles[ i][ equipo]) {
-                empatados++;
-            }
+    public int consulta(Partido p, int equipo) {
+        StrategyE strategy = null;
+        if (p instanceof Ganado) {
+            strategy = new Partidosganados();
+        } else if (p instanceof Empatado) {
+            strategy = new Partidosempatados();
+        }else if (p instanceof Perdido) {
+            strategy = new Partidosperdidos();
         }
-        return empatados;
+        return strategy.consul(equipo);
     }
-
-    /**
-     * Retorna el número total de partidos jugados por un equipo.
-     *
-     * @param equipo Número del equipo. equipo es un número válido.
-     * @return número de partidos jugados. número >= 0.
-     */
+    
     public int darPartidosJugados(int equipo) {
         int jugados = 0;
         for (int i = 0; i < maxEquipos; i++) {
@@ -285,14 +204,14 @@ public class Torneo {
      *
      * @param equipo número del equipo. equipo es un número válido.
      * @return número total de puntos en el campeonato que tiene el equipo.
-     * número >= 0.
-     */
+//     * número >= 0.
+//     */
     public int darTotalPuntos(int equipo) {
 //        Consultador cons = null;
 //        Ganado g = new Ganado();
 //        Empatado e = new Empatado();
 //        cons.consulta(g, equipo);
-//
+////
 //          return 3 * cons.consulta(g, equipo) + cons.consulta(e, equipo);
         return 3 * darPartidosGanados(equipo) + darPartidosEmpatados(equipo);
 //        return 0;
