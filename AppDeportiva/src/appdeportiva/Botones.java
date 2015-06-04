@@ -18,8 +18,8 @@ public class Botones extends JPanel implements ActionListener{
     
     private static final String CARGAR_EQUIPOS = "CARGAR_EQUIPOS";
     private static final String REGISTRAR_RESULTADO = "REGISTRAR_RESULTADO";
-    private static final String ORDENAR_TABLA = "ORDENAR_TABLA";
-    private static final String SALIR = "SALIR";
+    private static final String OPCION_1 = "OPCION_1";
+    private static final String OPCION_2 = "OPCION_2";
     private AppDeportiva ventana;
     private JButton botonCargarEquipos;
     private JButton botonRegistrarResultado;
@@ -36,11 +36,11 @@ public class Botones extends JPanel implements ActionListener{
         botonRegistrarResultado = new JButton("REGISTRAR PARTIDO");
         botonRegistrarResultado.setActionCommand(REGISTRAR_RESULTADO);
         botonRegistrarResultado.addActionListener(this);
-        botonOpcion1 = new JButton("ORDENAR TABLA");
-        botonOpcion1.setActionCommand(ORDENAR_TABLA);
+        botonOpcion1 = new JButton("OPCIÓN 1");
+        botonOpcion1.setActionCommand(OPCION_1);
         botonOpcion1.addActionListener(this);
-        botonOpcion2 = new JButton("SALIR");
-        botonOpcion2.setActionCommand(SALIR);
+        botonOpcion2 = new JButton("OPCIÓN 2");
+        botonOpcion2.setActionCommand(OPCION_2);
         botonOpcion2.addActionListener(this);
         
         
@@ -60,10 +60,10 @@ public class Botones extends JPanel implements ActionListener{
         else if(CARGAR_EQUIPOS.equals(comando)){
             ventana.cargarEquipos();
         }
-        else if(ORDENAR_TABLA.equals(comando)){
+        else if(OPCION_1.equals(comando)){
             ventana.reqFuncOpcion1();
         }
-        else if(SALIR.equals(comando)){
+        else if(OPCION_2.equals(comando)){
             ventana.reqFuncOpcion2();
         }
     }
