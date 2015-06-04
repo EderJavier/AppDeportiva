@@ -4,15 +4,14 @@
  */
 package StrategyE;
 
-import static javaapplication2.Campeonato.INVALIDO;
-import static javaapplication2.Campeonato.SIN_JUGAR;
-
 /**
  *
  * @author EQUIPO
  */
 public class Partidosganados implements StrategyE {
 
+    public static final int SIN_JUGAR = -1;
+    public static final int INVALIDO = -2;
     private int maxEquipos;
     private int[][] tablaGoles;
 

@@ -4,14 +4,14 @@
  */
 package StrategyE;
 
+import appdeportiva2.Empatado;
+import appdeportiva2.Equipo;
+import appdeportiva2.Ganado;
+import appdeportiva2.Partido;
+import appdeportiva2.Perdido;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.Properties;
-import javaapplication2.Empatado;
-import javaapplication2.Equipo;
-import javaapplication2.Ganado;
-import javaapplication2.Partido;
-import javaapplication2.Perdido;
 
 /**
  *
